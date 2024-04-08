@@ -1,15 +1,16 @@
-import os
+import socket
 import streamlit as st
-def get_device_name():
+def get_ip_address():
     try:
-        device_name = os.getenv('COMPUTERNAME')
-        return device_name
+        hostname = socket.gethostname()
+        ip_address = socket.gethostbyname(hostname)
+        return ip_address
     except Exception as e:
         st.write("Error: ", e)
         return None
 
-device_name = get_device_name()
-if device_name:
-    st.write("Device Name: ", device_name)
+ip_address = get_ip_address()
+if ip_address:
+    st.write("IP Address: ", ip_address)
 else:
-    st.write("Failed to retrieve device name")
+    st.write("Failed to retrieve IP address")

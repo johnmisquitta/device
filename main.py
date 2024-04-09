@@ -1,16 +1,11 @@
-import socket
 import streamlit as st
-def get_ip_address():
-    try:
-        hostname = socket.gethostname()
-        ip_address = socket.gethostbyname(hostname)
-        return ip_address
-    except Exception as e:
-        st.write("Error: ", e)
-        return None
+from streamlit_gsheets import GSheetsConnection
 
-ip_address = get_ip_address()
-if ip_address:
-    st.write("IP Address: ", ip_address)
-else:
-    st.write("Failed to retrieve IP address")
+# Create a connection object.
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+df = conn.read()
+
+# Print results.
+for row in df.itertuples():
+    st.write(f"{row.name} has a :{row.pet}:")

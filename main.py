@@ -7,9 +7,10 @@ data = conn.read(spreadsheet=url, usecols=[0, 1])
 
 
 editable_df = st.dataframe(data)
-
 # Update the Google Sheet with the edited DataFrame
 if st.button("Update Google Sheet"):
+    editable_df=data_editor(editable_df)
+
     conn.write(editable_df, worksheet="Sheet1")
 
 # Display the updated DataFrame

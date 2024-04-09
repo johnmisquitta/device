@@ -1,12 +1,12 @@
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 
-# Create a connection object.
-conn = st.connection("gsheets", type=GSheetsConnection)
-conn = st.connection("gsheets", type=GSheetsConnection)
+url = "https://docs.google.com/spreadsheets/d/1h3YyXq6n-_-2I_N7DuvdD-srgeMDPD5zINgbi5rGseU/edit#gid=0"
+conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+data = conn.read(spreadsheet=url, usecols=[0, 1])
+st.dataframe(data)
 
-df = conn.read()
-
-# Print results.
-for row in df.itertuples():
-    st.write(f"{row.name} has a :{row.pet}:")
+url = "https://docs.google.com/spreadsheets/d/1h3YyXq6n-_-2I_N7DuvdD-srgeMDPD5zINgbi5rGseU/edit#gid=0"
+conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+data = conn.read(spreadsheet=url, usecols=[0, 1])
+st.dataframe(data)

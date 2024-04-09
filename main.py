@@ -6,11 +6,11 @@ conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 data = conn.read(spreadsheet=url, usecols=[0, 1])
 
 
-editable_df = st.dataframe(data, editable=True)
+editable_df = st.dataframe(data)
 
 # Update the Google Sheet with the edited DataFrame
 if st.button("Update Google Sheet"):
-    conn.write(editable_df, worksheet="YOUR_WORKSHEET_NAME_HERE")
+    conn.write(editable_df, worksheet="Sheet1")
 
 # Display the updated DataFrame
 st.dataframe(editable_df)
